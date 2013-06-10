@@ -59,7 +59,7 @@ class EditCommand
             /* 
              * Try to launch the editor.
              *
-             * GROOVY-6201: Inherit I/O from current process 
+             * GROOVY-6201: Inherit I/O from the current process 
              */
             log.debug("Executing: $editorCommand $file")
             ProcessBuilder pb = new ProcessBuilder("$editorCommand", "$file")
@@ -74,7 +74,8 @@ class EditCommand
 
             log.debug("Editor contents: ${file.text}")
             
-            // Load the new lines...
+            // Clear current buffer and load the new lines...
+            buffers.clearSelected()
             file.eachLine { String line ->
                 shell << line as String
             }
