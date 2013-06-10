@@ -69,6 +69,7 @@ class EditCommand
             
             // Load the new lines...
             file.eachLine { String line ->
+                shell.runner.history.addToHistory(line)
                 shell << line as String
             }
         }
